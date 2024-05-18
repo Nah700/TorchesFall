@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=59 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_1y20t"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bjo77wuav1rav" path="res://Models/ps1psx_wooden_torch/scene.gltf" id="7_cv4og"]
 [ext_resource type="FontFile" uid="uid://deqw22jsdlnxf" path="res://Font/Dash-Horizon-Demo.otf" id="10_okwro"]
 [ext_resource type="AudioStream" uid="uid://dff0gnpyana7u" path="res://Music/Jeux-Olympiques-Paris-2024-Thème-Musical-Officiel-I-Parade-Victor-Le-Masne.wav" id="11_6usik"]
+[ext_resource type="Texture2D" uid="uid://da8jiyvoatwsi" path="res://logo-jo.png" id="12_ialso"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_di88p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -632,10 +633,10 @@ offset_bottom = 1069.0
 
 [node name="Score" type="Label" parent="CanvasLayer/GameUI"]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 71.0
-offset_right = 300.0
-offset_bottom = 138.0
+offset_left = 153.0
+offset_top = 29.0
+offset_right = 336.0
+offset_bottom = 96.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_jvhwn")
 
@@ -658,6 +659,10 @@ label_settings = SubResource("LabelSettings_vgsyb")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_6usik")
 autoplay = true
+
+[node name="Logo-jo" type="Sprite2D" parent="."]
+position = Vector2(95, 176)
+texture = ExtResource("12_ialso")
 
 [connection signal="body_entered" from="Player/DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]
