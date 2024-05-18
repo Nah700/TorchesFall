@@ -1,6 +1,10 @@
 extends Node3D
 
+var score = 0
 @export var mob_scene: PackedScene
+@onready var scoreLabel = $CanvasLayer/GameUI/Score
+@onready var timerLabel = $CanvasLayer/GameUI/Timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var time = $GameTime.time_left
+	timerLabel.text = "%d" % int(time)
+	
 
 func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
@@ -26,11 +32,17 @@ func _on_mob_timer_timeout():
 
 func _on_despawn_area_body_entered(body): #décrémenation
 	if body.is_in_group("mobs"):
+		score -= 1
+		if score < 0:
+			score = 0
+		scoreLabel.text = "Score: %d" % score
 		body.queue_free()
 
 
 func _on_detection_area_body_entered(body): #incrémentation
 	if body.is_in_group("mobs"):
+		score += 1
+		scoreLabel.text = "Score: %d" % score 
 		body.queue_free()
 
 
