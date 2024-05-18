@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=60 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_1y20t"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://deqw22jsdlnxf" path="res://Font/Dash-Horizon-Demo.otf" id="10_okwro"]
 [ext_resource type="AudioStream" uid="uid://dff0gnpyana7u" path="res://Music/Jeux-Olympiques-Paris-2024-Thème-Musical-Officiel-I-Parade-Victor-Le-Masne.wav" id="11_6usik"]
 [ext_resource type="Texture2D" uid="uid://da8jiyvoatwsi" path="res://logo-jo.png" id="12_ialso"]
+[ext_resource type="PackedScene" uid="uid://bk0nfo5btjpxm" path="res://main_menu/pause_menu.tscn" id="13_23o02"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_di88p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -663,6 +664,10 @@ autoplay = true
 [node name="Logo-jo" type="Sprite2D" parent="."]
 position = Vector2(95, 176)
 texture = ExtResource("12_ialso")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("13_23o02")]
 
 [connection signal="body_entered" from="Player/DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]

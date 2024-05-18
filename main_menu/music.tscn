@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpg10cq0fkris"]
+
+[ext_resource type="AudioStream" uid="uid://xk220ilfbjxd" path="res://main_menu/Survivor - Eye Of The Tiger (Official HD Video).wav" id="1_ss3k0"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_ss3k0")
+autoplay = true
