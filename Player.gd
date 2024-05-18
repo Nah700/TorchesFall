@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed = 5.0
+var speed = 10.0
 var gravity = -100
 var jump_force = 15.0
 

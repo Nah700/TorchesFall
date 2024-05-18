@@ -24,7 +24,15 @@ func _on_mob_timer_timeout():
 	mob.initialize(spawn_position, player_position)
 	add_child(mob)
 
-func _on_despawn_area_body_entered(body):
+func _on_despawn_area_body_entered(body): #décrémenation
 	if body.is_in_group("mobs"):
 		body.queue_free()
 
+
+func _on_detection_area_body_entered(body): #incrémentation
+	if body.is_in_group("mobs"):
+		body.queue_free()
+
+
+func _on_game_time_timeout():
+	print("Game is finished")
