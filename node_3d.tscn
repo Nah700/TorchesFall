@@ -1,7 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=51 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
+[ext_resource type="Script" path="res://node_3d.gd" id="1_1y20t"]
 [ext_resource type="Script" path="res://Player.gd" id="1_ahu8d"]
+[ext_resource type="PackedScene" uid="uid://dnqln6htanos2" path="res://mob.tscn" id="2_74pm2"]
 [ext_resource type="Shader" uid="uid://dltmq3f51ilpg" path="res://FireShader.tres" id="2_h7w5m"]
 [ext_resource type="Texture2D" uid="uid://bqwjjfcojk1sq" path="res://Texture/Voronoi01.png" id="3_pwo1m"]
 [ext_resource type="Texture2D" uid="uid://c37lkl1itsksr" path="res://Texture/Flame01.png" id="4_rm1fs"]
@@ -332,7 +334,15 @@ scale_max = 24.09
 scale_curve = SubResource("CurveTexture_xuwpq")
 color = Color(4, 1.25, 0.6, 0.8)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tu6pb"]
+size = Vector3(27, 1, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hjpx"]
+size = Vector3(27, 1, 1.5)
+
 [node name="World" type="Node3D"]
+script = ExtResource("1_1y20t")
+mob_scene = ExtResource("2_74pm2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kva8c")
@@ -348,16 +358,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 12)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.688, -3)
 
 [node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.60305)
 script = SubResource("GDScript_3dek3")
 
 [node name="Mesh" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.5, -2.972)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.5, -2.88904)
 mesh = SubResource("BoxMesh_gw5xh")
 skeleton = NodePath("../..")
 
 [node name="floorCollision" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(0.99998, 0, -0.00637041, 0, 1, 0, 0.00637041, 0, 0.99998, 0.0068293, -15.4962, -2.88821)
+transform = Transform3D(0.99998, 0, -0.00637041, 0, 1, 0, 0.00637041, 0, 0.99998, 0.0068293, -15.3545, -2.88821)
 shape = SubResource("BoxShape3D_ti6ue")
 
 [node name="Floor2" type="StaticBody3D" parent="."]
@@ -397,6 +407,7 @@ transform = Transform3D(0.99998, 0, -0.00637041, 0, 1, 0, 0.00637041, 0, 0.99998
 shape = SubResource("BoxShape3D_ti6ue")
 
 [node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.32577)
 script = ExtResource("1_ahu8d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
@@ -568,3 +579,21 @@ lifetime = 2.5
 visibility_aabb = AABB(-1.9277, -1.7513, -1.55396, 3.85539, 3.96354, 3.10792)
 process_material = SubResource("ParticleProcessMaterial_41jim")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
+
+[node name="DespawnArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.939666, -4.44216)
+
+[node name="DespawnCollision" type="CollisionShape3D" parent="DespawnArea"]
+shape = SubResource("BoxShape3D_tu6pb")
+
+[node name="SpawnArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.6649, -4.19635)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="SpawnArea"]
+shape = SubResource("BoxShape3D_7hjpx")
+
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
