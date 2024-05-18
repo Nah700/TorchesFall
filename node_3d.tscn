@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=58 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_1y20t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bwcy5q81md2t1" path="res://Texture/Flame02.png" id="5_ath8g"]
 [ext_resource type="PackedScene" uid="uid://bjo77wuav1rav" path="res://Models/ps1psx_wooden_torch/scene.gltf" id="7_cv4og"]
 [ext_resource type="FontFile" uid="uid://deqw22jsdlnxf" path="res://Font/Dash-Horizon-Demo.otf" id="10_okwro"]
+[ext_resource type="Texture2D" uid="uid://da8jiyvoatwsi" path="res://logo-jo.png" id="11_2wdxr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_di88p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -631,10 +632,10 @@ offset_bottom = 1069.0
 
 [node name="Score" type="Label" parent="CanvasLayer/GameUI"]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 71.0
-offset_right = 300.0
-offset_bottom = 138.0
+offset_left = 99.0
+offset_top = 14.0
+offset_right = 282.0
+offset_bottom = 81.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_jvhwn")
 
@@ -653,6 +654,11 @@ grow_horizontal = 2
 text = "
 "
 label_settings = SubResource("LabelSettings_vgsyb")
+
+[node name="Logo-jo" type="Sprite2D" parent="."]
+position = Vector2(46, 120)
+scale = Vector2(0.585749, 0.628109)
+texture = ExtResource("11_2wdxr")
 
 [connection signal="body_entered" from="Player/DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="DespawnArea" to="." method="_on_despawn_area_body_entered"]
