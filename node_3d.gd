@@ -44,6 +44,7 @@ func _on_detection_area_body_entered(body): #incrémentation
 		score += 1
 		scoreLabel.text = "Score: %d" % score 
 		body.queue_free()
+		$TorchEffect.play()
 
 
 func _on_game_time_timeout():

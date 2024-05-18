@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=61 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_1y20t"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dff0gnpyana7u" path="res://Music/Jeux-Olympiques-Paris-2024-Thème-Musical-Officiel-I-Parade-Victor-Le-Masne.wav" id="11_6usik"]
 [ext_resource type="Texture2D" uid="uid://da8jiyvoatwsi" path="res://logo-jo.png" id="12_ialso"]
 [ext_resource type="PackedScene" uid="uid://bk0nfo5btjpxm" path="res://main_menu/pause_menu.tscn" id="13_23o02"]
+[ext_resource type="AudioStream" uid="uid://ds78bjdb8s35e" path="res://Music/aimbot.wav" id="13_abn47"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_di88p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -657,13 +658,18 @@ text = "
 "
 label_settings = SubResource("LabelSettings_vgsyb")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_6usik")
+volume_db = -9.0
 autoplay = true
 
 [node name="Logo-jo" type="Sprite2D" parent="."]
 position = Vector2(95, 176)
 texture = ExtResource("12_ialso")
+
+[node name="TorchEffect" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_abn47")
+volume_db = 8.0
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
