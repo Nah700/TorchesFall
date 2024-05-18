@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bgfmh8o15jnip"]
+[gd_scene load_steps=47 format=3 uid="uid://bgfmh8o15jnip"]
 
 [ext_resource type="ArrayMesh" uid="uid://c8guaxw5xgtgs" path="res://Models/pokemon-stadium/source/untitled/untitled.obj" id="1_1gy2k"]
 [ext_resource type="Script" path="res://Player.gd" id="1_ahu8d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqwjjfcojk1sq" path="res://Texture/Voronoi01.png" id="3_pwo1m"]
 [ext_resource type="Texture2D" uid="uid://c37lkl1itsksr" path="res://Texture/Flame01.png" id="4_rm1fs"]
 [ext_resource type="Texture2D" uid="uid://bwcy5q81md2t1" path="res://Texture/Flame02.png" id="5_ath8g"]
+[ext_resource type="PackedScene" uid="uid://bjo77wuav1rav" path="res://Models/ps1psx_wooden_torch/scene.gltf" id="7_cv4og"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_di88p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -407,11 +408,11 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02395, -3)
 shape = SubResource("ConvexPolygonShape3D_q2s62")
 
-[node name="FireRed" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50032, -4.26491, 0)
+[node name="FireRed1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4449, -6.61195, -2.15028)
 
-[node name="StaticFlame" type="GPUParticles3D" parent="FireRed"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.83969, 4.46334, -3.11808)
+[node name="StaticFlame" type="GPUParticles3D" parent="FireRed1"]
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.52199, 8.60652, -0.576879)
 material_override = SubResource("ShaderMaterial_rwnam")
 amount = 1
 fixed_fps = 60
@@ -419,8 +420,8 @@ visibility_aabb = AABB(-2.22679, -2.30645, -4.88687, 4.45358, 4.63243, 5.24444)
 process_material = SubResource("ParticleProcessMaterial_x06v5")
 draw_pass_1 = SubResource("QuadMesh_f56gb")
 
-[node name="Flames" type="GPUParticles3D" parent="FireRed"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82113, 4.18027, -3.27371)
+[node name="Flames" type="GPUParticles3D" parent="FireRed1"]
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.50343, 8.35941, -0.784933)
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
 lifetime = 1.2
@@ -428,8 +429,8 @@ visibility_aabb = AABB(-4, -3.76953, -4, 8, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_5r2lm")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
 
-[node name="Smoke" type="GPUParticles3D" parent="FireRed"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82113, 4.47593, -3.27371)
+[node name="Smoke" type="GPUParticles3D" parent="FireRed1"]
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.50343, 8.64935, -0.72703)
 sorting_offset = -1.0
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
@@ -438,11 +439,14 @@ visibility_aabb = AABB(-4, -3.76953, -4, 8, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_gykld")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
 
+[node name="torch" parent="FireRed1" instance=ExtResource("7_cv4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45857, 7.44166, -0.918659)
+
 [node name="FireRed2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3171, -4.15091, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04932, -6.61195, -2.15028)
 
 [node name="StaticFlame" type="GPUParticles3D" parent="FireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.83969, 4.46334, -3.11808)
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.52199, 8.60652, -0.576879)
 material_override = SubResource("ShaderMaterial_rwnam")
 amount = 1
 fixed_fps = 60
@@ -451,7 +455,7 @@ process_material = SubResource("ParticleProcessMaterial_x06v5")
 draw_pass_1 = SubResource("QuadMesh_f56gb")
 
 [node name="Flames" type="GPUParticles3D" parent="FireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82113, 4.18027, -3.27371)
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.50343, 8.35941, -0.784933)
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
 lifetime = 1.2
@@ -460,14 +464,17 @@ process_material = SubResource("ParticleProcessMaterial_5r2lm")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
 
 [node name="Smoke" type="GPUParticles3D" parent="FireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82113, 4.47593, -3.27371)
+transform = Transform3D(1, 0, 0, 0, 0.980635, -0.195843, 0, 0.195843, 0.980635, -4.50343, 8.64935, -0.72703)
 sorting_offset = -1.0
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
 lifetime = 2.5
-visibility_aabb = AABB(-1.9277, -1.7513, -1.55396, 3.85539, 3.96354, 3.10792)
+visibility_aabb = AABB(-4, -3.76953, -4, 8, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_gykld")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
+
+[node name="torch" parent="FireRed2" instance=ExtResource("7_cv4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45857, 7.44166, -0.918659)
 
 [node name="BigFireRed1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, -3.87173, 0)
@@ -504,7 +511,7 @@ draw_pass_1 = SubResource("QuadMesh_anrfr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.0976, -4.68636, 0)
 
 [node name="StaticFlame" type="GPUParticles3D" parent="BigFireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.206, -5.7782, 2.06502)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.206, -4.88031, 2.06502)
 material_override = SubResource("ShaderMaterial_rwnam")
 amount = 1
 fixed_fps = 60
@@ -513,7 +520,7 @@ process_material = SubResource("ParticleProcessMaterial_41jim")
 draw_pass_1 = SubResource("QuadMesh_f56gb")
 
 [node name="Flames" type="GPUParticles3D" parent="BigFireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1875, -6.06127, 1.90939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1875, -5.16338, 1.90939)
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
 lifetime = 1.2
@@ -522,7 +529,7 @@ process_material = SubResource("ParticleProcessMaterial_41jim")
 draw_pass_1 = SubResource("QuadMesh_anrfr")
 
 [node name="Smoke" type="GPUParticles3D" parent="BigFireRed2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1875, -5.76561, 1.90939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1875, -4.86772, 1.90939)
 sorting_offset = -1.0
 material_override = SubResource("ShaderMaterial_xhqlb")
 amount = 20
