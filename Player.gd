@@ -8,6 +8,11 @@ func _ready():
 	pass
 
 func _process(delta):
+	if (self.has_node("Model")):
+		update_animation_paramaters()
+	for child in self.get_children():
+		if "@Node3D@" in child.name:
+			child.name = "Model"
 	handle_movement(delta)
 
 func handle_movement(delta):
@@ -19,6 +24,16 @@ func handle_movement(delta):
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	
+	if input_dir.x != 0:
+		var model = $Model
+		if (model):
+			if input_dir.x > 0:
+				model.rotation_degrees.y = 90
+			elif input_dir.x < 0:
+				model.rotation_degrees.y = -90
+			else:
+				model.rotation_degrees.y = 0
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
@@ -26,3 +41,12 @@ func handle_movement(delta):
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_force
 	move_and_slide()
+	
+func update_animation_paramaters():
+	var animation_tree = $Model/AnimationTree
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+		animation_tree["parameters/conditions/idle"] = false
+		animation_tree["parameters/conditions/is_running"] = true
+	else:
+		animation_tree["parameters/conditions/idle"] = true
+		animation_tree["parameters/conditions/is_running"] = false

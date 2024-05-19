@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://qkxlqjdh6mnu"]
+
+[ext_resource type="PackedScene" uid="uid://cf23rusf2m0it" path="res://Models/default_skin.fbx" id="1_1nbvp"]
+[ext_resource type="AnimationLibrary" uid="uid://bkx0smlocjin8" path="res://anims.glb" id="2_0uwbc"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gxb65"]
+animation = &"anims/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tec1e"]
+animation = &"anims/running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4awku"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ju02o"]
+advance_mode = 2
+advance_condition = &"is_running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3hmyq"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6fo2v"]
+states/Start/position = Vector2(231, 100)
+states/anims_idle/node = SubResource("AnimationNodeAnimation_gxb65")
+states/anims_idle/position = Vector2(400, 102)
+states/anims_running/node = SubResource("AnimationNodeAnimation_tec1e")
+states/anims_running/position = Vector2(645, 100)
+transitions = ["Start", "anims_idle", SubResource("AnimationNodeStateMachineTransition_4awku"), "anims_idle", "anims_running", SubResource("AnimationNodeStateMachineTransition_ju02o"), "anims_running", "anims_idle", SubResource("AnimationNodeStateMachineTransition_3hmyq")]
+
+[node name="Model" instance=ExtResource("1_1nbvp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.998, 0)
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"anims": ExtResource("2_0uwbc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_6fo2v")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_running = false

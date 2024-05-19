@@ -12,7 +12,7 @@ func _ready():
 	$DespawnArea.body_entered.connect(_on_despawn_area_body_entered)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var time = $GameTime.time_left
 	timerLabel.text = "%d" % int(time)
 	
@@ -45,7 +45,3 @@ func _on_detection_area_body_entered(body): #incrémentation
 		scoreLabel.text = "Score: %d" % score 
 		body.queue_free()
 		$TorchEffect.play()
-
-
-func _on_game_time_timeout():
-	print("Game is finished")
