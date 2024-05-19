@@ -1,6 +1,5 @@
 extends Node3D
 
-var score = 0
 @export var mob_scene: PackedScene
 @onready var scoreLabel = $CanvasLayer/GameUI/Score
 @onready var timerLabel = $CanvasLayer/GameUI/Timer
@@ -32,16 +31,16 @@ func _on_mob_timer_timeout():
 
 func _on_despawn_area_body_entered(body): #décrémenation
 	if body.is_in_group("mobs"):
-		score -= 1
-		if score < 0:
-			score = 0
-		scoreLabel.text = "Score: %d" % score
+		GlobalVariables.score -= 1
+		if GlobalVariables.score < 0:
+			GlobalVariables.score = 0
+		scoreLabel.text = "Score: %d" % GlobalVariables.score
 		body.queue_free()
 
 
 func _on_detection_area_body_entered(body): #incrémentation
 	if body.is_in_group("mobs"):
-		score += 1
-		scoreLabel.text = "Score: %d" % score 
+		GlobalVariables.score += 1
+		scoreLabel.text = "Score: %d" % GlobalVariables.score 
 		body.queue_free()
 		$TorchEffect.play()

@@ -624,7 +624,7 @@ shape = SubResource("BoxShape3D_7hjpx")
 autostart = true
 
 [node name="GameTime" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 120.0
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
